@@ -1,5 +1,39 @@
 // Middlewares for GET /api/exercise routes go here
 
+const usersQueryValidator = (req, res, next) => {
+  const limitParam = req.query.limit;
+
+  const hasLimitParam = limitParam !== undefined && limitParam !== null;
+
+  if (hasLimitParam) {
+    if (limitParam.length === 0) {
+      res.statusCode = 400;
+      return res.send({
+        error: "The 'limit' query-parameter is invalid (its empty).",
+      });
+    }
+
+    const limit = Number(limitParam);
+
+    if (isNaN(limit)) {
+      res.statusCode = 400;
+      return res.send({
+        error: "The number under 'limit' query-parameter is invalid.",
+      });
+    }
+
+    if (limit < 0) {
+      res.statusCode = 400;
+      return res.send({
+        error:
+          "The number under 'limit' query-parameter is invalid (negative numbers are not allowed for limit).",
+      });
+    }
+  }
+
+  next();
+};
+
 const userQueryValidator = (req, res, next) => {
   const usernameParam = req.query.username;
   const userIdParam = req.query.userId;
@@ -47,6 +81,8 @@ const logQueryValidator = (req, res, next) => {
     });
   }
 
+  // TODO: If both fromDate and toDate are present, check if fromDate <= toDate
+
   const hasFromDateParam =
     fromDateParam !== undefined && fromDateParam !== null;
 
@@ -59,6 +95,8 @@ const logQueryValidator = (req, res, next) => {
         error: "The date under 'from' query-parameter is invalid.",
       });
     }
+
+    // TODO: Check if fromDate is within today.
   }
 
   const hasToDateParam = toDateParam !== undefined && toDateParam !== null;
@@ -105,5 +143,6 @@ const logQueryValidator = (req, res, next) => {
   next();
 };
 
+module.exports.usersQueryValidator = usersQueryValidator;
 module.exports.userQueryValidator = userQueryValidator;
 module.exports.logQueryValidator = logQueryValidator;
