@@ -1,0 +1,19 @@
+{
+  "name": "exercise-tracker",
+  "version": "0.0.1",
+  "description": "An REST API for tracking your exercises.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "exercise",
+    "exercise-tracker",
+    "tracker",
+    "log",
+    "gym",
+    "workout"
+  ],
+  "author": "Mohammed Sadiq",
+  "license": "MIT"
+}
