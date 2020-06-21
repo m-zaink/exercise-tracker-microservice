@@ -1,6 +1,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
+const database = require("./data-access");
 
 const router = require("./routes");
 
@@ -10,6 +11,8 @@ if (result.error) {
   console.log(result.error);
   throw result.error;
 }
+
+database.config();
 
 const app = express();
 
