@@ -24,7 +24,7 @@ const addExerciseBodyValidator = (req, res, next) => {
   const userIdParam = req.body.userId;
   const descriptionParam = req.body.description;
   const durationParam = req.body.duration;
-  const dateParam = req.body.from;
+  const dateParam = req.body.date;
 
   // Validations go here
 
