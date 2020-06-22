@@ -1,16 +1,8 @@
-const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const database = require("./data-access");
 
 const router = require("./routes");
-
-const result = dotenv.config({ path: "./config/.env" });
-
-if (result.error) {
-  console.log(result.error);
-  throw result.error;
-}
 
 database.config();
 
